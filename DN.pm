@@ -10,7 +10,7 @@ use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.26';
+our $VERSION = '0.27';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }
@@ -81,6 +81,11 @@ sub ParseRFC2253
   return $self;
 }
 
+# todo: when escaping got built into openssl
+# % -> %25
+# \(.) %xx
+# split (/\//)
+# %xx -> original character
 sub ParseOpenSSL
 {
   my $class = shift;

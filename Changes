@@ -1,5 +1,8 @@
 Revision history for Perl extension X500::DN.
 
+0.27  refined openssl formatter, will match its input after patch for req -subj and ca -subj sent to openssl-dev mailinglist.
+      added a test for this format.
+
 0.26  documentation fixes
       'use 5.6.1;' because that seems to be the version that introduced the 'our' keyword
 

@@ -1,7 +1,7 @@
 
 use strict;
 use Test;
-BEGIN { plan tests => 46, todo => [38] };
+BEGIN { plan tests => 47, todo => [38] };
 
 use X500::DN;
 ok(1); # If we made it this far, we're ok.
@@ -132,3 +132,7 @@ ok (sub { !$dn && $@ }, qr:^DN must begin with '/':);
 $dn = eval { X500::DN->ParseOpenSSL ('/foo') };
 #print $@;
 ok (sub { !$dn && $@ }, qr/^syntax error in RDN 'foo'/);
+
+# Test 47: produce openssl format with escapes
+$dn = new X500::DN (new X500::RDN ('foo'=>'bar/\\baz'));
+ok ($dn && $dn->getOpenSSLString(), '/foo=bar\\/\\\\baz');

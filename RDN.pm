@@ -35,7 +35,7 @@ sub getAttributeValue
 }
 
 # internal function: quote special AttributeValue characters
-sub _quoteAttributeValue
+sub _RFC2253quoteAttributeValue
 {
   my $value = shift;
   $value =~ s/([,;+"\\<>])/\\$1/g;
@@ -47,15 +47,23 @@ sub _quoteAttributeValue
 sub getRFC2253String
 {
   my $self = shift;
-  return join ('+', map { "$_=".&_quoteAttributeValue ($self->{$_}); } keys (%$self));
+  return join ('+', map { "$_=".&_RFC2253quoteAttributeValue ($self->{$_}); } keys (%$self));
 }
 
 sub getX500String
 {
   my $self = shift;
-  my $s = join (', ', map { "$_=".&_quoteAttributeValue ($self->{$_}) } keys (%$self));
+  my $s = join (', ', map { "$_=".&_RFC2253quoteAttributeValue ($self->{$_}) } keys (%$self));
   $s = "($s)" if ($self->isMultivalued);
   return $s;
+}
+
+# internal function: quote special AttributeValue characters
+sub _OpenSSLquoteAttributeValue
+{
+  my $value = shift;
+  $value =~ s/([\\\/])/\\$1/g;
+  return $value;
 }
 
 sub getOpenSSLString
@@ -63,7 +71,7 @@ sub getOpenSSLString
   my $self = shift;
   croak "openssl syntax for multi-valued RDNs is unknown" if ($self->isMultivalued);
   my $key = (keys (%$self))[0];
-  my $s = "$key=".&_quoteAttributeValue ($self->{$key});
+  my $s = "$key=".&_OpenSSLquoteAttributeValue ($self->{$key});
   return $s;
 }
 
