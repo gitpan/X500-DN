@@ -38,9 +38,9 @@ sub getAttributeValue
 sub _quoteAttributeValue
 {
   my $value = shift;
-  $value =~ s/([,;+"\\<>])/\\\1/g;
-  $value =~ s/( )$/\\\1/g;		# space at end of string
-  $value =~ s/^([ #])/\\\1/g;		# space at beginning of string
+  $value =~ s/([,;+"\\<>])/\\$1/g;
+  $value =~ s/( )$/\\$1/g;		# space at end of string
+  $value =~ s/^([ #])/\\$1/g;		# space at beginning of string
   return $value;
 }
 

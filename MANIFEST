@@ -6,4 +6,5 @@ Makefile.PL
 RDN.pm
 RDN.pod
 README
-test.pl
+t/dn.t
+t/rdn.t

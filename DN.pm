@@ -9,7 +9,7 @@ use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }
