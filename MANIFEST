@@ -1,9 +1,9 @@
-Changes.txt
-Makefile.PL
+Changes
+DN.pm
+DN.pod
 MANIFEST
-MANIFEST.SKIP
-Parser.pm
-Readme.txt
+Makefile.PL
+RDN.pm
+RDN.pod
+README
 test.pl
-X500DN.dat
-t/base.t

@@ -1,29 +1,11 @@
 use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
-
-WriteMakefile
-(
-	($] ge '5.005') ?
-	(
-		'AUTHOR' => 'Ron Savage (rpsavage@ozemail.com.au)',
-		'ABSTRACT' => 'X500 Distinguished Name parser',
-    ) : (),
-'clean'				=>
-	{
-	'FILES'			=> 'blib/* Makefile MANIFEST X500-DN-*'
-	},
-'dist'				=>
-	{
-	'COMPRESS'		=> 'gzip',
-	'SUFFIX'		=> 'gz',
-	},
-'DISTNAME'			=> 'X500-DN',
-'NAME'				=> 'X500::DN::Parser',
-'PM'				=>
-	{
-	'Parser.pm' 	=> '$(INST_LIBDIR)/Parser.pm',
-	},
-'PREREQ_PM'			=> {},
-'VERSION_FROM'		=> 'Parser.pm',
+WriteMakefile(
+    'NAME'		=> 'X500::DN',
+    'VERSION_FROM'	=> 'DN.pm', # finds $VERSION
+    'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
+    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
+      (ABSTRACT_FROM => 'DN.pod', # retrieve abstract from module
+       AUTHOR     => 'Robert Joop <yaph-020416@timesink.de>') : ()),
 );

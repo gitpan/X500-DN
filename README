@@ -1,0 +1,34 @@
+X500/DN version 0.05
+====================
+
+X500::DN provides a pure perl parser and formatter for RFC 2253 style
+DN strings.
+
+This is an alpha version.
+
+Known bugs:
+
+  Skips all white space, even within attribute values.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  Parse::RecDescent - developed and tested with version 1.80
+
+COPYRIGHT AND LICENCE
+
+Copyright (c) 2002 Robert Joop <yaph-020416@timesink.de>
+All rights reserved.
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+

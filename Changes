@@ -1,0 +1,6 @@
+Revision history for Perl extension X500::DN.
+
+0.01  Wed Apr 17 16:47:24 2002
+	- original version; created by h2xs 1.21 with options
+		-AXc -n X500::DN
+
