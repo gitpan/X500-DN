@@ -9,14 +9,14 @@ use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.23';
+our $VERSION = '0.25';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }
 DistinguishedName: name(?) { @{$item[1]} > 0 ? $item[1][0] : []; }
 name: nameComponent(s /[,;]\\s*/)
 nameComponent: attributeTypeAndValue(s /\\s*\\+\\s*/) { new X500::RDN (map { @$_ } @{$item[1]}); }
-attributeTypeAndValue: attributeType '=' attributeValue { [ @item[1,3] ]; }
+attributeTypeAndValue: attributeType /\\s*=\\s*/ attributeValue { [ @item[1,3] ]; }
 attributeType: Alpha keychar(s?) { join ('', $item[1], @{$item[2]}); }
   | oid
 keychar: Alpha | Digit | '-'
@@ -29,7 +29,6 @@ string: (stringchar | pair)(s) { join ('', @{$item[1]}); }
   | '#' hexstring { $item[2] }
   | '"' (pair | quotechar)(s) '"' { join ('', @{$item[2]}); }
 quotechar: /[^"]/
-#special: { $thisrule->{tokensep} = undef } /[,=+<>#; ]/ { $item[2] }
 special: /[,=+<>#; ]/
 pair: '\\\\' ( special | '\\\\' | '"' | hexpair ) { $item[2] }
 stringchar: /[^,=+<>#;\\\\"]/

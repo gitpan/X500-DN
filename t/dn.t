@@ -1,7 +1,7 @@
 
 use strict;
 use Test;
-BEGIN { plan tests => 46, todo => [19, 20, 23, 24, 38] };
+BEGIN { plan tests => 46, todo => [38] };
 
 use X500::DN;
 ok(1); # If we made it this far, we're ok.

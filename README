@@ -1,14 +1,15 @@
-X500/DN version 0.05
+X500/DN version 0.25
 ====================
 
 X500::DN provides a pure perl parser and formatter for RFC 2253 style
 DN strings.
 
-This is an alpha version.
+This is a late alpha version.
 
 Known bugs:
 
-  Skips all white space, even within attribute values.
+  Due to Parse::RecDescent's greedyness, white space after attribute
+  values gets into the parsed value.
 
 INSTALLATION
 
