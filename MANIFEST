@@ -1,6 +1,7 @@
+Changes.txt
+Parser.pm
+Makefile.PL
 MANIFEST
 MANIFEST.SKIP
-Makefile.PL
-Parser.pm
 test.pl
 t/base.t

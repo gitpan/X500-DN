@@ -1,12 +1,12 @@
-#!/usr/gnu/bin/perl -w
-
 use ExtUtils::MakeMaker;
+# See lib/ExtUtils/MakeMaker.pm for details of how to influence
+# the contents of the Makefile that is written.
 
 WriteMakefile
 (
 'clean'				=>
 	{
-	'FILES'			=> 'blib/* Makefile MANIFEST X500-DN*'
+	'FILES'			=> 'blib/* Makefile MANIFEST X500-DN-*'
 	},
 'dist'				=>
 	{
@@ -19,5 +19,6 @@ WriteMakefile
 	{
 	'Parser.pm' 	=> '$(INST_LIBDIR)/Parser.pm',
 	},
+'PREREQ_PM'			=> {},
 'VERSION_FROM'		=> 'Parser.pm',
 );

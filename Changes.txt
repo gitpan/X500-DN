@@ -1,0 +1,6 @@
+Revision history for Perl extension X500::DN.
+
+1.11  Tue Mar 30 15:27:19 1999
+	- original version; created by h2xs 1.18
+
+Use h2xs to generate the skeleton for DN.pm.
