@@ -1,5 +1,29 @@
 Revision history for Perl extension X500::DN.
 
+0.26  documentation fixes
+      'use 5.6.1;' because that seems to be the version that introduced the 'our' keyword
+
+0.25  skip spaces around = sign
+      takes 4 tests from todo list
+
+0.23  convert test.pl to t/*.t
+      six more tests
+
+0.22  let the openssl parser croak on error
+      five more tests
+
+0.21  add parser and formatter for current openssl syntax.
+      two more tests
+
+0.20  fork off X500::RDN module and have X500::DN use it.
+      add forgotten .pod files to MANIFEST
+      add 26 more tests
+
+0.15  stop Parse::RecDescent's automatic skipping of spaces
+      add 14 more tests
+
+0.05  fix ABSTRACT_FROM
+
 0.01  Wed Apr 17 16:47:24 2002
 	- original version; created by h2xs 1.21 with options
 		-AXc -n X500::DN

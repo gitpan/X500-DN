@@ -4,12 +4,13 @@
 
 package X500::DN;
 
+use 5.6.1; # the "our" keyword below needs it
 use strict;
 use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.25';
+our $VERSION = '0.26';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }

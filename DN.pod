@@ -1,17 +1,17 @@
 =head1 NAME
 
-X500::DN - handle X.500 DNs, parse and format them
+X500::DN - handle X.500 DNs (Distinguished Names), parse and format them
 
 =head1 SYNOPSIS
 
   use X500::DN;
 
-  $dn = X500::DN->ParseRFC2253 ('cn=John Doe, o=Acme\\, Inc., c=US') or die;
+  my $dn = X500::DN->ParseRFC2253 ('cn=John Doe, o=Acme\\, Inc., c=US') or die;
   print $dn->getRFC2253String(), "\n";
 
   $dn = new X500::DN (new X500::RDN ('c'=>'US'), new X500::RDN ('cn'=>'John Doe'));
-  $rdn0 = $dn->getRDN (0);
-  $c = $rdn0->getAttributeValue ('c');
+  my $rdn0 = $dn->getRDN (0);
+  my $c = $rdn0->getAttributeValue ('c');
 
 =head1 NOTE
 
@@ -78,7 +78,8 @@ None.
 
 =over 4
 
-=item * Due to Parse::RecDescent's greedyness, multivalued RDNs are not parsed correctly. It might be possible to work around this.
+=item * Due to Parse::RecDescent's greedyness, white space after attribute values gets into the parsed value.
+It might be possible to work around this.
 
 =back
 
@@ -98,7 +99,14 @@ L<perl>.
 
 =head1 HISTORY
 
-Early 2002: First Idea, discussed on comp.lang.perl.moderated
-April 2002: First public release, 0.15
+=over 4
+
+=item Early 2002:
+First Idea, discussed on comp.lang.perl.moderated
+
+=item April 2002:
+First public release, 0.15
+
+=back
 
 =cut

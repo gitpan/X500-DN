@@ -1,13 +1,13 @@
 =head1 NAME
 
-X500::RDN - handle X.500 RDNs, parse and format them
+X500::RDN - handle X.500 RDNs (Relative Distinguished Names), parse and format them
 
 =head1 SYNOPSIS
 
   use X500::RDN;
 
-  $rdn = new X500::RDN ('c'=>'US');
-  $c = $rdn->getAttributeValue ('c');
+  my $rdn = new X500::RDN ('c'=>'DE');
+  my $c = $rdn->getAttributeValue ('c');
 
 =head1 DESCRIPTION
 
