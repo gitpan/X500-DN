@@ -29,7 +29,7 @@ require Exporter;
 
 @EXPORT_OK	= qw();
 
-$VERSION	= '1.11';
+$VERSION	= '1.13';
 
 # Preloaded methods go here.
 # -------------------------------------------------------------------
@@ -54,10 +54,10 @@ sub invalidDN
 
 sub new
 {
-	my($class)	= shift;
-	my($self)	= {};
-
-	$self -> {'callBack'} = shift;
+	my($class)				= shift;
+	$class					= ref($class) || $class;
+	my($self)				= {};
+	$self -> {'callBack'}	= shift;
 
 	return bless $self, $class;
 
@@ -213,32 +213,97 @@ sub parse
 # Autoload methods go after =cut, and are processed by the autosplit program.
 
 1;
+
 __END__
-# Below is the stub of documentation for your module. You better edit it!
 
 =head1 NAME
 
-X500::DN - Perl extension for blah blah blah
+C<X500::DN::Parser> - Parse X500 Distinguished Names
 
 =head1 SYNOPSIS
 
-  use X500::DN;
-  blah blah blah
+	use X500::DN::Parser;
+
+	my($parser) = new X500::DN::Parser(\&errorInDN);
+
+	my($dn, $genericDN, %RDN) =
+		$parser -> parse('c=au;o=MagicWare;cn=Ron Savage',
+				'c', '[l]', 'o', '[ou]', 'cn');
 
 =head1 DESCRIPTION
 
-Stub documentation for X500::DN was created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+Parse DNs where the caller knows the number of RDNs.
 
-Blah blah blah.
+=head1 parse()
+
+Input Parameters:
+
+=over 4
+
+=item *
+
+DN to be parsed
+
+=item *
+
+A list of the expected components of the DN.
+Any component can be put in [] to indicate that that component is optional
+
+=back
+
+Output List:
+
+=over 4
+
+=item *
+
+$dn: The DN passed in
+
+=item *
+
+$genericDN:	A generic DN matching the given DN
+
+=item *
+
+%component:	The components of the DN and their values. Eg:
+
+	If $dn = 'c=au;o=MagicWare', then these key/values appear:
+	'c' => 'au',
+	'o' => 'MagicWare'
+
+=back
+
+=head1 INSTALLATION
+
+You install C<X500::DN::Parser>, as you would install any perl module library,
+by running these commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+If you want to install a private copy of C<X500::DN::Parser> in your home
+directory, then you should try to produce the initial Makefile with
+something like this command:
+
+	perl Makefile.PL LIB=~/perl
+		or
+	perl Makefile.PL LIB=C:/Perl/Site/Lib
+
+If, like me, you don't have permission to write man pages into unix system
+directories, use:
+
+	make pure_install
+
+instead of make install. This option is secreted in the middle of p 414 of the
+second edition of the dromedary book.
 
 =head1 AUTHOR
 
-A. U. Thor, a.u.thor@a.galaxy.far.far.away
+C<X500::DN::Parser> was written by Ron Savage I<E<lt>rpsavage@ozemail.com.auE<gt>> in 1999.
 
-=head1 SEE ALSO
+=head1 LICENCE
 
-perl(1).
-
-=cut
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.

@@ -4,6 +4,11 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile
 (
+	($] ge '5.005') ?
+	(
+		'AUTHOR' => 'Ron Savage (rpsavage@ozemail.com.au)',
+		'ABSTRACT' => 'X500 Distinguished Name parser',
+    ) : (),
 'clean'				=>
 	{
 	'FILES'			=> 'blib/* Makefile MANIFEST X500-DN-*'

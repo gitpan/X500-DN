@@ -1,6 +1,17 @@
 Revision history for Perl extension X500::DN.
 
-1.11  Tue Mar 30 15:27:19 1999
-	- original version; created by h2xs 1.18
+1.13 26-May-99
+--------------
+o Ensure POD survives buggy pod2man
+o Ship Readme.txt, the output of pod2text
+o Combine old test.pl with code which reads X500DN.dat from DFA::Command
+
+1.12 19-Apr-99
+--------------
+o Patch Makefile.PL to support ActivePel's ppm.
+
+1.11 30-Mar-99
+--------------
+o Original version; created by h2xs 1.18
 
 Use h2xs to generate the skeleton for DN.pm.

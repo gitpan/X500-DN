@@ -1,0 +1,105 @@
+# Header stuff.
+
+header
+date=11-Apr-96
+endHeader
+
+# Add country stuff.
+
+addCountry
+c=au
+endAddCountry
+
+addCountry
+c=us
+endAddCountry
+
+addCountry
+c=gb
+endAddCountry
+
+# Add O[U] stuff.
+
+addOrganization
+c=au;o=Government
+endAddOrganization
+
+addOrganizationalUnit
+c=au;o=Government;ou=Parliament
+endAddOrganizationalUnit
+
+addOrganizationalUnit
+c=au;o=Government;ou=Treasury
+endAddOrganizationalUnit
+
+# Add commoners.
+
+addCommonName
+c=au;o=Government;ou=Parliament;cn=Ron Savage
+attributes
+surname=Savage
+endAddCommonName
+
+addCommonName
+c=au;o=Government;ou=Parliament;cn=Pen Savage
+attributes
+surname=Savage
+endAddCommonName
+
+addCommonName
+c=au;o=Government;ou=Parliament;cn=Nicky Savage
+attributes
+surname=Savage
+endAddCommonName
+
+addCommonName
+c=au;o=Government;ou=Treasury;cn=Zoe Savage
+attributes
+surname=Savage
+endAddCommonName
+
+# Delete commoners.
+
+deleteCommonName
+c=au;o=Government;ou=Treasury;cn=Zoe Savage
+endDeleteCommonName
+
+deleteCommonName
+c=au;o=Government;ou=Parliament;cn=Nicky Savage
+endDeleteCommonName
+
+deleteCommonName
+c=au;o=Government;ou=Parliament;cn=Pen Savage
+endDeleteCommonName
+
+deleteCommonName
+c=au;o=Government;ou=Parliament;cn=Ron Savage
+endDeleteCommonName
+
+# Delete O[U] stuff.
+
+deleteOrganizationalUnit
+c=au;o=Government;ou=Treasury
+endDeleteOrganizationalUnit
+
+deleteOrganizationalUnit
+c=au;o=Government;ou=Parliament
+endDeleteOrganizationalUnit
+
+deleteOrganization
+c=au;o=Government
+endDeleteOrganization
+
+# Delete country stuff.
+
+deleteCountry
+c=gb
+endDeleteCountry
+
+deleteCountry
+c=us
+endDeleteCountry
+
+deleteCountry
+c=au
+endDeleteCountry

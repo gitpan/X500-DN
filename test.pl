@@ -1,48 +1,32 @@
 #!/usr/gnu/bin/perl -w
 #
 # Name:
-#	test_DN.pl.
-#
-# Purpose:
-#	Exercise the X500::DN::Parser module.
-#
-# Abbreviations:
-#	DN:  X.500 Distinguished Name.
-#	RDN: X.500 Relative Distinguished Name.
-#
-#-------------------------------------------------------------------
+#	test.pl
+
+use integer;
+use strict;
+
+use X500::DN::Parser;
+
+# --------------------------------------------------------------------------
 
 sub checkDN
 {
 	my($testDN, @RDN) = @_;
 
+	my($parser) = new X500::DN::Parser(\&errorInDN);
+
 	my($dn, $genericDN, %RDN) = $parser -> parse($testDN, @RDN);
 
-	if (! defined($dn) )
-	{
-		print "\tError. \n";
-	}
-	else
-	{
-		print "DN: $dn. \nGeneric DN: $genericDN. \nComponents of the RDN:\n";
-
-		my($key);
-
-		for $key (keys(%RDN) )
-		{
-			print "$key: $RDN{$key}. \n";
-		}
-	}
-
-	print '-' x 65, "\n";
+	&printDN($testDN, $dn, $genericDN, %RDN);
 
 }	# End of checkDN.
 
-#-------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 sub errorInDN
 {
-	($this, $explanation, $dn, $genericDN) = @_;
+	my($this, $explanation, $dn, $genericDN) = @_;
 
 	$this = '';	# To stop a compiler warning.
 
@@ -51,13 +35,36 @@ sub errorInDN
 
 }	 # End of errorInDN.
 
-#-------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
-# Initialize.
+sub printDN
+{
+	my($testDN, $dn, $genericDN, %RDN) = @_;
 
-use X500::DN::Parser;
+	print "Input:      $testDN \n";
 
-$parser = new X500::DN::Parser(\&errorInDN);
+	if (! defined($dn) )
+	{
+		print "Unknown error in DN: $dn \n";
+	}
+	else
+	{
+		print "DN:         $dn \n";
+		print "Generic DN: $genericDN \n";
+
+		my($rdn);
+
+		for $rdn (sort(keys(%RDN) ) )
+		{
+			print "RDN:        $rdn=$RDN{$rdn} \n";
+		}
+
+		print "\n";
+	}
+
+}	# End of printDN.
+
+# --------------------------------------------------------------------------
 
 &checkDN('c=au', 'c');
 &checkDN('c=au;o=MagicWare', 'c', 'o');
@@ -72,3 +79,23 @@ $parser = new X500::DN::Parser(\&errorInDN);
 &checkDN('c=au;l=Melbourne;o=MagicWare;cn=Ron Savage', 'c', '[l]', 'o', '[ou]', 'cn');
 &checkDN('c=au;l=Melbourne;o=MagicWare;ou=Research;cn=Ron Savage', 'c', '[l]', 'o', '[ou]', 'cn');
 
+my($parser) = new X500::DN::Parser(\&errorInDN);
+
+my($fileName) = shift || 'X500DN.dat';
+
+print "Reading $fileName \n\n";
+
+open(INX, $fileName) || die("Can't open($fileName): $!");
+
+while (defined($_ = <INX>) )
+{
+	next if (! /^c/);
+
+	chomp;
+
+	my($dn, $genericDN, %RDN) =
+		$parser -> parse($_, 'c', '[o]', '[ou]', '[cn]');
+
+	&printDN($_, $dn, $genericDN, %RDN);
+
+}

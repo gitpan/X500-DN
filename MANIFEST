@@ -1,7 +1,9 @@
 Changes.txt
-Parser.pm
 Makefile.PL
 MANIFEST
 MANIFEST.SKIP
+Parser.pm
+Readme.txt
 test.pl
+X500DN.dat
 t/base.t
