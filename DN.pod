@@ -38,17 +38,13 @@ Creates a DN object from zero or more arguments of type X500::RDN.
 
 Creates a DN object from an RFC 2253 formatted DN string notation.
 
-=item * $object = X500::DN->ParseOpenSSL ('/C=US/CN=John Doe');
-
-Creates a DN object from an openssl formatted DN string notation.
-
 =item * $object->getRFC2253String();
 
 Returns the DN as a string formatted according to RFC 2253 syntax.
 
 =item * $object->getOpenSSLString();
 
-Returns the DN as a string formatted according to one of openssl's syntaxes.
+Returns the DN as a string formatted suitable for C<openssl req -subj> and C<openssl ca -subj>.
 
 =item * $object->getX500String();
 

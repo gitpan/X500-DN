@@ -1,7 +1,7 @@
 
 use strict;
 use Test;
-BEGIN { plan tests => 47, todo => [38] };
+BEGIN { plan tests => 43, todo => [38] };
 
 use X500::DN;
 ok(1); # If we made it this far, we're ok.
@@ -108,31 +108,19 @@ ok ($rdn && $rdn->getAttributeTypes(), 2);
 ok ($rdn && $rdn->getAttributeValue ('foo'), '1');
 ok ($rdn && $rdn->getAttributeValue ('bar'), '2');
 
-# Tests 40-41: openssl formatted DN
-$dn = X500::DN->ParseOpenSSL ('/C=DE/CN=Test');
-ok ($dn && $dn->getRFC2253String(), 'CN=Test, C=DE');
-ok ($dn && $dn->getOpenSSLString(), '/C=DE/CN=Test');
-ok ($dn && $dn->getX500String(), '{C=DE,CN=Test}');
+# Test 40: illegal RFC 2253 syntax
+$dn = X500::DN->ParseRFC2253 ('foo');
+ok ($dn, undef);
 
-# Tests 43: no openssl output for multi-valued RDN
+# Test 41: openssl formatted DN
+$dn = eval { X500::DN->ParseOpenSSL ('/C=DE/CN=Test') };
+ok (sub { !$dn && $@ }, qr:^use 'openssl -nameopt RFC2253' and ParseRFC2253():);
+
+# Test 42: no openssl output for multi-valued RDN
 $dn = new X500::DN (new X500::RDN ('foo'=>1, 'bar'=>2));
 $s = eval { $dn->getOpenSSLString() };
 ok (sub { $dn && !defined ($s) && $@ }, qr/^openssl syntax for multi-valued RDNs is unknown/);
 
-# Test 44: illegal RFC 2253 syntax
-$dn = X500::DN->ParseRFC2253 ('foo');
-ok ($dn, undef);
-
-# Test 45: illegal openssl syntax
-$dn = eval { X500::DN->ParseOpenSSL ('foo') };
-#print $@;
-ok (sub { !$dn && $@ }, qr:^DN must begin with '/':);
-
-# Test 46: illegal openssl syntax
-$dn = eval { X500::DN->ParseOpenSSL ('/foo') };
-#print $@;
-ok (sub { !$dn && $@ }, qr/^syntax error in RDN 'foo'/);
-
-# Test 47: produce openssl format with escapes
+# Test 43: produce openssl format with escapes
 $dn = new X500::DN (new X500::RDN ('foo'=>'bar/\\baz'));
 ok ($dn && $dn->getOpenSSLString(), '/foo=bar\\/\\\\baz');

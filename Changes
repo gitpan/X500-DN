@@ -1,5 +1,8 @@
 Revision history for Perl extension X500::DN.
 
+0.28  force users to use ParseRFC2253 instead of ParseOpenSSL, now that we changed openssl to support '-nameopt RFC2253' everywhere.
+      tests adjusted accordingly.
+
 0.27  refined openssl formatter, will match its input after patch for req -subj and ca -subj sent to openssl-dev mailinglist.
       added a test for this format.
 

@@ -10,7 +10,7 @@ use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.27';
+our $VERSION = '0.28';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }
@@ -81,26 +81,9 @@ sub ParseRFC2253
   return $self;
 }
 
-# todo: when escaping got built into openssl
-# % -> %25
-# \(.) %xx
-# split (/\//)
-# %xx -> original character
 sub ParseOpenSSL
 {
-  my $class = shift;
-  my $text = shift;
-  croak "DN must begin with '/'," unless ($text =~ s:^/::);
-  my (@rdnstrs) = split (/\//, $text);
-  my (@rdns);
-  foreach my $s (@rdnstrs)
-  {
-    my ($t, $v);
-    croak "syntax error in RDN '$s'," unless (($t, $v) = $s =~ /^(.+)=(.*)$/);
-    push (@rdns, new X500::RDN ($t=>$v));
-  }
-  my $self = new X500::DN (@rdns);
-  return $self;
+  croak "use 'openssl -nameopt RFC2253' and ParseRFC2253()";
 }
 
 sub getRFC2253String
