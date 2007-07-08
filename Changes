@@ -1,5 +1,7 @@
 Revision history for Perl extension X500::DN.
 
+0.29  added missing PREREQ_PM in Makefile.PL
+
 0.28  force users to use ParseRFC2253 instead of ParseOpenSSL, now that we changed openssl to support '-nameopt RFC2253' everywhere.
       tests adjusted accordingly.
 

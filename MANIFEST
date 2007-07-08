@@ -8,3 +8,4 @@ RDN.pod
 README
 t/dn.t
 t/rdn.t
+META.yml                                 Module meta-data (added by MakeMaker)

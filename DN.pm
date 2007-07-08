@@ -1,4 +1,4 @@
-# Copyright (c) 2002 Robert Joop <yaph-020416@timesink.de>
+# Copyright (c) 2002 Robert Joop <yaph-070708@timesink.de>
 # All rights reserved.
 # This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
 
@@ -10,7 +10,7 @@ use Carp;
 use Parse::RecDescent 1.80;
 use X500::RDN;
 
-our $VERSION = '0.28';
+our $VERSION = '0.29';
 
 my $rfc2253_grammar = q {
 startrule: DistinguishedName /^\\Z/ { new X500::DN (reverse (@{$item[1]})); }

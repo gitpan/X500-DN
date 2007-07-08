@@ -1,4 +1,4 @@
-# Copyright (c) 2002 Robert Joop <yaph-020416@timesink.de>
+# Copyright (c) 2002 Robert Joop <yaph-070708@timesink.de>
 # All rights reserved.
 # This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
 

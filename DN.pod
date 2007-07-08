@@ -81,7 +81,7 @@ It might be possible to work around this.
 
 =head1 AUTHOR
 
-Robert Joop E<lt>yaph-020416@timesink.deE<gt>
+Robert Joop E<lt>yaph-070708@timesink.deE<gt>
 
 =head1 COPYRIGHT
 
@@ -98,7 +98,7 @@ L<perl>.
 =over 4
 
 =item Early 2002:
-First Idea, discussed on comp.lang.perl.moderated
+First idea, discussed on comp.lang.perl.moderated
 
 =item April 2002:
 First public release, 0.15
